@@ -1,0 +1,44 @@
+version: "3.0"
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.0.1
+    # NOTE: the default vm.max_map_count maynot be enough to
+    #       run elasticsearch increase it to at least  262144
+    # sudo sysctl vm.max_map_count=262144
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+    networks:
+      - logging
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.role == manager
+
+  kibana:
+    image: kibana:7.0.1
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    networks:
+      - logging
+    ports:
+      - "5601:5601"
+
+  logstash:
+    build: ./logstash
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5140:5140"
+
+networks:
+  logging:
+
+volumes:
+  esdata:
+

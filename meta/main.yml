@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: "Kostyuchenko Andrew"
+  company: OCM
+  license: BSD
+  min_ansible_version: 1.4
+  platforms:
+   - name: Centos
+     versions:
+      - 7
+  categories:
+   - web
+dependencies: []
+
