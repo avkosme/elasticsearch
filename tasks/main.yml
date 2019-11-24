@@ -1,17 +1,16 @@
 ---
 - name: Create elasticsearch docker directory
   file:
-    path: /opt/docker-services/elasticsearch
+    path: /opt/docker-services/elk
     state: directory
   become: yes
   tags: install elasticsearch latest
 
 
 - name: Copy directory
-  synchronize:
-    src: "{{ playbook_dir }}/roles/install/tasks/elasticsearch/files/logstash"
-    dest: /opt/docker-services/elasticsearch
-    mode: push
+  copy:
+    src: "logstash"
+    dest: /opt/docker-services/elk
   become: yes
   tags: install elasticsearch latest
 
@@ -19,7 +18,7 @@
 - name: Copy docker-compose.yml
   template:
     src: docker-compose.yml
-    dest: /opt/docker-services/elasticsearch/docker-compose.yml
+    dest: /opt/docker-services/elk/docker-compose.yml
   become: yes
   tags: install elasticsearch latest
 

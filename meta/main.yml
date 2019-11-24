@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: "Kostyuchenko Andrew"
-  company: OCM
+  company: Home
   license: BSD
   min_ansible_version: 1.4
   platforms:
