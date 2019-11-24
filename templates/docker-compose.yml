@@ -34,7 +34,7 @@ services:
     depends_on:
       - elasticsearch
     ports:
-      - "5140:5140"
+      - "5140:5140/udp"
 
 networks:
   logging:
